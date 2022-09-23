@@ -1,0 +1,32 @@
+.header1{
+    font-family: monospace;
+    background-color: black;
+    /* height: 70px; */
+    padding: 50px;
+    text-align: center;
+}
+.spanHeader{
+    color: white;
+    text-align: right;
+    font-size: 20px;
+}
+
+.containerBody{
+    background-color: grey;
+    height: 300px;
+    margin-top: 20px;
+}
+
+.containerResult{
+    background-color:gold;
+    height: 400px;
+    margin-top: 20px;
+}
+
+.divDescription{
+    
+}
+
+.divContainer{
+    padding: 20px;
+}
