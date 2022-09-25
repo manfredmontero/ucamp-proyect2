@@ -133,6 +133,5 @@ function clearData()
 {
     var list = document.getElementById('tbo')
     list.innerHTML = ""
-    
 }
 
