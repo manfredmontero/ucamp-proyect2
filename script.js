@@ -1,43 +1,146 @@
 let inputField = document.getElementById('nameTxt')
+let inputApellido = document.getElementById('lastTxt')
+let inputID = document.getElementById('idTxt')
 let boton = document.getElementById('btnSubmit')
-let data = JSON.parse(localStorage.getItem('nombres'))
-localStorage.setItem('nombres',JSON.stringify(['JUAN']))
-let nombresArray = data !== [] ? data : []
+
+let data = JSON.parse(localStorage.getItem('TestUser'))
+
+let nombresArray =  data !== [] ? data : []
 let nombre = ''
-inputField.addEventListener('change', function () {
+inputID.addEventListener('change', function () {
     nombre = inputField.value
+    boton.innerText = 'Insertar'
 })
-let lista = document.getElementById('lista')
-//let lista = document.createElement('ul')
-const crearLista = () => {
-   
-}
-crearLista()
-//document.body.appendChild(lista)
+let lista = document.getElementById('tbo')
 
-function newFunction() {
-    clearData()
-    nombresArray.push(nombre)
-    localStorage.setItem('nombres', JSON.stringify(nombresArray))
-    data.forEach((e,i) => {
-        let item = document.createElement('li')
-        let borrar = document.createElement('button')
-        borrar.innerText='Borrar'
-        if(e != ''){
-            item.innerText = e
-            lista.appendChild(item)
-            item.appendChild(borrar)
-            borrar.addEventListener('click',e=>{
-                nombresArray.splice(i,1)
-                localStorage.setItem('nombres', JSON.stringify(nombresArray))
-            })
-        }
+
+
+function llenarStorager(){
+    cargarTable()
+    if(inputID.value != ''){
+    
+    localStorage.setItem(inputID.value,JSON.stringify([`${inputID.value},${inputField.value},${inputApellido.value}`]))
+    let data = JSON.parse(localStorage.getItem(inputID.value))
+
+data.forEach((e,i) => {
+    let Names = e.split(',')
+    let row = document.createElement('tr')
+    let columnID = document.createElement('td')
+    let columnName = document.createElement('td')
+    let columnlastName = document.createElement('td')
+    //let item = document.createElement('li')
+    let editar = document.createElement('button')
+    //editar.setAttribute('class','btnBorrar')
+    let borrar = document.createElement('button')
+    //borrar.setAttribute('class','btnBorrar')
+    borrar.innerText='Borrar'
+    editar.innerText='Editar'
+    if(e != ''){
+        //item.innerText = e
+
+        lista.appendChild(row)
+
+        columnID.innerText = Names[0]
+        columnName.innerText = Names[1]
+        columnlastName.innerText = Names[2]
+        row.appendChild(columnID)
+        row.appendChild(columnName)
+        row.appendChild(columnlastName)
         
-    })
+        borrar.addEventListener('click',e=>{
+            localStorage.removeItem(columnID.innerText)
+
+        })
+        editar.addEventListener('click',e=>{
+            document.getElementById('idTxt').value = columnID.innerText
+            document.getElementById('nameTxt').value = columnName.innerText
+            document.getElementById('lastTxt').value = columnlastName.innerText
+            boton.innerText = 'Actualizar'
+        })
+
+        row.appendChild(borrar)
+        row.appendChild(editar)
+    }
+    
+})
+}
+document.getElementById('idTxt').value = ''
+document.getElementById('nameTxt').value = ''
+document.getElementById('lastTxt').value = ''
+
 }
 
-function clearData(){
-    var list = document.getElementById('lista')
+function cargarTable(){
+
+let values = allStorage()
+clearData()
+console.log(values);
+let keys = Object.keys(localStorage)
+
+values.forEach((e,i)=>{
+    let Names = e.split(',')
+    let row = document.createElement('tr')
+    let columnID = document.createElement('td')
+    let columnName = document.createElement('td')
+    let columnlastName = document.createElement('td')
+    //let item = document.createElement('li')
+    let editar = document.createElement('button')
+    //editar.setAttribute('class','btnBorrar')
+    let borrar = document.createElement('button')
+    //borrar.setAttribute('class','btnBorrar')
+    borrar.innerText='Borrar'
+    editar.innerText='Editar'
+    if(e != ''){
+        //item.innerText = e
+
+        lista.appendChild(row)
+
+        columnID.innerText = Names[0].substring(2)
+        console.log(columnID.innerText);
+        columnName.innerText = Names[1]
+        columnlastName.innerText = Names[2]
+        row.appendChild(columnID)
+        row.appendChild(columnName)
+        row.appendChild(columnlastName)
+        
+        console.log(columnID);
+        borrar.addEventListener('click',e=>{
+            localStorage.removeItem(columnID.innerText)
+        })
+        editar.addEventListener('click',e=>{
+           document.getElementById('idTxt').value = columnID.innerText
+           document.getElementById('nameTxt').value = columnName.innerText
+           document.getElementById('lastTxt').value = columnlastName.innerText
+           boton.innerText = 'Actualizar'
+        })
+
+        row.appendChild(borrar)
+        row.appendChild(editar)
+    }
+
+})
+}
+
+
+function allStorage() {
+
+    var values = [],
+        keys = Object.keys(localStorage),
+        i = keys.length;
+
+    while ( i-- ) {
+        values.push( localStorage.getItem(keys[i]) );
+    }
+
+    return values;
+}
+
+function clearData()
+{
+
+    var list = document.getElementById('tbo')
     list.innerHTML = ""
+
+    
 }
 

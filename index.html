@@ -5,7 +5,9 @@
     <!-- CSS only -->
     
   </head>
-  <body onload="newFunction()">
+  
+  <!-- <body> -->
+   <body onload="llenarStorager()"> 
     <header>
         <div class="header1">
             <span class="spanHeader">
@@ -15,20 +17,46 @@
     </header>
     <tbody>
         <div class="containerBody">
-            <div class="divDescription divContainer"><span>Esta pantalla es solamente para ingresar datos en la tabla, por favor ingrese valores</span></div>
+            <div class="divDescription divContainer"><span class="spanHeader">Esta pantalla es solamente para ingresar datos en la tabla, por favor ingrese valores</span></div>
             <div class="divContainer">
-                <label for="nameTxt">Ingrese el nombre</label>
-            <Input id="nameTxt" type="text"></Input>
-            
+            <label class="spanHeader" for="idTxt">Ingrese el ID:</label>
+            <Input id="idTxt" class="TextoRedondo" type="text"></Input>
+             <label class="spanHeader" for="nameTxt">Ingrese el nombre:</label>
+            <Input id="nameTxt" class="TextoRedondo" type="text"></Input>
+            <label class="spanHeader" for="lastTxt">Ingrese el Apellido:</label>
+            <Input id="lastTxt" class="TextoRedondo" type="text"></Input>
             </div>
-            <div class="divContainer">
-                <button id="btnSubmit" onclick="newFunction()"> Insertar</button>
+            <div class="divContainer centrar">
+                <button id="btnSubmit" class="botonInsertar" onclick="llenarStorager()"> Insertar</button>
             </div>
 
-            <ul id=lista></ul>
+            
         </div>
         <div class="containerResult">
-            
+            <table id="tbl" class="spanHeader">
+                <thead>
+                    <th>
+                        ID
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>Apellido</th>
+                    <th>
+                        Editar
+                    </th>
+                    <th>
+                        Borrar
+                    </th>
+                </thead>
+                <tbody id='tbo'>
+                    <tr>
+                        <td>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </tbody>
     <script src="script.js" type="text/javascript"></script>
