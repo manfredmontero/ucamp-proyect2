@@ -13,134 +13,119 @@ inputID.addEventListener('change', function () {
 })
 let lista = document.getElementById('tbo')
 
-
-
 function llenarStorager(){
     cargarTable()
     if(inputID.value != ''){
     
-    localStorage.setItem(inputID.value,JSON.stringify([`${inputID.value},${inputField.value},${inputApellido.value}`]))
-    let data = JSON.parse(localStorage.getItem(inputID.value))
+        localStorage.setItem(inputID.value,JSON.stringify([`${inputID.value},${inputField.value},${inputApellido.value}`]))
+        let data = JSON.parse(localStorage.getItem(inputID.value))
 
-data.forEach((e,i) => {
-    let Names = e.split(',')
-    let row = document.createElement('tr')
-    let columnID = document.createElement('td')
-    let columnName = document.createElement('td')
-    let columnlastName = document.createElement('td')
-    //let item = document.createElement('li')
-    let editar = document.createElement('button')
-    //editar.setAttribute('class','btnBorrar')
-    let borrar = document.createElement('button')
-    //borrar.setAttribute('class','btnBorrar')
-    borrar.innerText='Borrar'
-    editar.innerText='Editar'
-    if(e != ''){
-        //item.innerText = e
+        data.forEach((e,i) => {
+            let Names = e.split(',')
+            let row = document.createElement('tr')
+            let columnID = document.createElement('td')
+            let columnName = document.createElement('td')
+            let columnlastName = document.createElement('td')
+            let editar = document.createElement('button')
+            editar.setAttribute('class','btnBorrar')
+            let borrar = document.createElement('button')
+            borrar.setAttribute('class','btnBorrar')
+            borrar.innerText='Borrar'
+            editar.innerText='Editar'
+            if(e != ''){
+                
+                lista.appendChild(row)
 
-        lista.appendChild(row)
+                columnID.innerText = Names[0]
+                columnName.innerText = Names[1]
+                columnlastName.innerText = Names[2]
+                row.appendChild(columnID)
+                row.appendChild(columnName)
+                row.appendChild(columnlastName)
+                
+                borrar.addEventListener('click',e=>{
+                    localStorage.removeItem(columnID.innerText)
 
-        columnID.innerText = Names[0]
-        columnName.innerText = Names[1]
-        columnlastName.innerText = Names[2]
-        row.appendChild(columnID)
-        row.appendChild(columnName)
-        row.appendChild(columnlastName)
-        
-        borrar.addEventListener('click',e=>{
-            localStorage.removeItem(columnID.innerText)
+                })
+                
+                editar.addEventListener('click',e=>{
+                    document.getElementById('idTxt').value = columnID.innerText
+                    document.getElementById('nameTxt').value = columnName.innerText
+                    document.getElementById('lastTxt').value = columnlastName.innerText
+                    boton.innerText = 'Actualizar'
+                })
 
+                row.appendChild(borrar)
+                row.appendChild(editar)
+            }
+            
         })
-        editar.addEventListener('click',e=>{
-            document.getElementById('idTxt').value = columnID.innerText
-            document.getElementById('nameTxt').value = columnName.innerText
-            document.getElementById('lastTxt').value = columnlastName.innerText
-            boton.innerText = 'Actualizar'
-        })
-
-        row.appendChild(borrar)
-        row.appendChild(editar)
     }
-    
-})
-}
-document.getElementById('idTxt').value = ''
-document.getElementById('nameTxt').value = ''
-document.getElementById('lastTxt').value = ''
-
+    document.getElementById('idTxt').value = ''
+    document.getElementById('nameTxt').value = ''
+    document.getElementById('lastTxt').value = ''
 }
 
 function cargarTable(){
+    let values = allStorage()
+    clearData()
+    console.log(values);
+    let keys = Object.keys(localStorage)
+        values.forEach((e,i)=>{
+            let Names = e.split(',')
+            let row = document.createElement('tr')
+            let columnID = document.createElement('td')
+            let columnName = document.createElement('td')
+            let columnlastName = document.createElement('td')
+            let editar = document.createElement('button')
+            editar.setAttribute('class','btnBorrar')
+            let borrar = document.createElement('button')
+            borrar.setAttribute('class','btnBorrar')
+            borrar.innerText='Borrar'
+            editar.innerText='Editar'
+            if(e != ''){
 
-let values = allStorage()
-clearData()
-console.log(values);
-let keys = Object.keys(localStorage)
+                lista.appendChild(row)
 
-values.forEach((e,i)=>{
-    let Names = e.split(',')
-    let row = document.createElement('tr')
-    let columnID = document.createElement('td')
-    let columnName = document.createElement('td')
-    let columnlastName = document.createElement('td')
-    //let item = document.createElement('li')
-    let editar = document.createElement('button')
-    //editar.setAttribute('class','btnBorrar')
-    let borrar = document.createElement('button')
-    //borrar.setAttribute('class','btnBorrar')
-    borrar.innerText='Borrar'
-    editar.innerText='Editar'
-    if(e != ''){
-        //item.innerText = e
+                columnID.innerText = Names[0].substring(2)
+                console.log(columnID.innerText);
+                columnName.innerText = Names[1]
+                columnlastName.innerText = Names[2]
+                row.appendChild(columnID)
+                row.appendChild(columnName)
+                row.appendChild(columnlastName)
+                
+                console.log(columnID);
+                borrar.addEventListener('click',e=>{
+                    localStorage.removeItem(columnID.innerText)
+                })
+                editar.addEventListener('click',e=>{
+                document.getElementById('idTxt').value = columnID.innerText
+                document.getElementById('nameTxt').value = columnName.innerText
+                document.getElementById('lastTxt').value = columnlastName.innerText
+                boton.innerText = 'Actualizar'
+                })
 
-        lista.appendChild(row)
-
-        columnID.innerText = Names[0].substring(2)
-        console.log(columnID.innerText);
-        columnName.innerText = Names[1]
-        columnlastName.innerText = Names[2]
-        row.appendChild(columnID)
-        row.appendChild(columnName)
-        row.appendChild(columnlastName)
-        
-        console.log(columnID);
-        borrar.addEventListener('click',e=>{
-            localStorage.removeItem(columnID.innerText)
+                row.appendChild(borrar)
+                row.appendChild(editar)
+            }
         })
-        editar.addEventListener('click',e=>{
-           document.getElementById('idTxt').value = columnID.innerText
-           document.getElementById('nameTxt').value = columnName.innerText
-           document.getElementById('lastTxt').value = columnlastName.innerText
-           boton.innerText = 'Actualizar'
-        })
-
-        row.appendChild(borrar)
-        row.appendChild(editar)
-    }
-
-})
 }
 
-
 function allStorage() {
-
     var values = [],
         keys = Object.keys(localStorage),
         i = keys.length;
-
     while ( i-- ) {
         values.push( localStorage.getItem(keys[i]) );
     }
-
     return values;
 }
 
 function clearData()
 {
-
     var list = document.getElementById('tbo')
     list.innerHTML = ""
-
     
 }
 

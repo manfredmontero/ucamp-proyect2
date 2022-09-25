@@ -34,16 +34,17 @@
 }
 
 .btnBorrar {
-    padding: 20px;
-    background-color: rgb(94, 94, 94);
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
     border-radius: 5px;
-    font-size: 10px;
-    margin-left: 200px;
+    font-size: 20px;
+ font-family: monospace;
 }
 
 .TextoRedondo{
     padding: 7px;
     border-radius: 10px;
+    font-family: monospace;
 }
 
 .botonInsertar{
@@ -53,6 +54,10 @@
     font-family: monospace;
     font-size: 25px;
     
+}
+
+.botonInsertar:hover{
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
 }
 
 table{
