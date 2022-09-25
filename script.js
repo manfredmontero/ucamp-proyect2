@@ -38,21 +38,24 @@ function llenarStorager(){
 
                 columnID.innerText = Names[0]
                 columnName.innerText = Names[1]
-                columnlastName.innerText = Names[2]
+                columnlastName.innerText = Names[2].substring(-2)
                 row.appendChild(columnID)
                 row.appendChild(columnName)
                 row.appendChild(columnlastName)
                 
                 borrar.addEventListener('click',e=>{
                     localStorage.removeItem(columnID.innerText)
-
+                    clearData()
+                    cargarTable()
                 })
                 
                 editar.addEventListener('click',e=>{
                     document.getElementById('idTxt').value = columnID.innerText
                     document.getElementById('nameTxt').value = columnName.innerText
-                    document.getElementById('lastTxt').value = columnlastName.innerText
+                    document.getElementById('lastTxt').value = columnlastName.innerText.substring(-2)
                     boton.innerText = 'Actualizar'
+                    clearData()
+                    cargarTable()
                 })
 
                 row.appendChild(borrar)
@@ -90,7 +93,7 @@ function cargarTable(){
                 columnID.innerText = Names[0].substring(2)
                 console.log(columnID.innerText);
                 columnName.innerText = Names[1]
-                columnlastName.innerText = Names[2]
+                columnlastName.innerText = Names[2].substring(-2)
                 row.appendChild(columnID)
                 row.appendChild(columnName)
                 row.appendChild(columnlastName)
@@ -98,12 +101,16 @@ function cargarTable(){
                 console.log(columnID);
                 borrar.addEventListener('click',e=>{
                     localStorage.removeItem(columnID.innerText)
+                    clearData()
+                    cargarTable()
                 })
                 editar.addEventListener('click',e=>{
                 document.getElementById('idTxt').value = columnID.innerText
                 document.getElementById('nameTxt').value = columnName.innerText
-                document.getElementById('lastTxt').value = columnlastName.innerText
+                document.getElementById('lastTxt').value = columnlastName.innerText.substring(-2)
                 boton.innerText = 'Actualizar'
+                clearData()
+                cargarTable()
                 })
 
                 row.appendChild(borrar)
